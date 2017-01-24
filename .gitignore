@@ -1,0 +1,6 @@
+corpus.txt
+*.model
+articles.json
+tags
+*.bin
+
