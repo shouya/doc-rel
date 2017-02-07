@@ -28,9 +28,12 @@ def model():
 
     with open('corpus.txt', 'r') as f:
         lines = f.readlines()
-    lines = [jieba.lcut(l.strip()) for l in lines if len(l.strip()) >= 5]
 
-    model.m = Word2Vec(lines, size=N)
+    def tokenize(t):
+        return filter(lambda w: w != ' ', jieba.lcut(t.strip()))
+    sentences = map(tokenize, lines)
+
+    model.m = Word2Vec(sentences, size=N)
     model.m.init_sims(replace=True)
     model.m.save('word2vec.model')
 
@@ -46,12 +49,24 @@ def normalize(mat):
 
 def bag_of_words(text):
     m = model()
-    tags = jieba.analyse.extract_tags(text, topK=10)
-    indices = [m.vocab[word].index for word in tags if word in m.vocab]
-    word_count = m.syn0.shape[0]
+    tags = jieba.analyse.extract_tags(text, topK=10, withWeight=True)
+    tags = [t for t in tags if t[0] in m.vocab]
 
-    vec = np.zeros(word_count)
-    vec[indices] = (0 if len(indices) == 0 else 1.0 / np.sqrt(len(indices)))
+    words   = [t[0] for t in tags]
+    weights = [t[1] for t in tags]
+
+    indices = [m.vocab[w].index for w in words]
+
+    vocab_count = m.syn0.shape[0]
+    vec = np.zeros(vocab_count)
+
+    vec[indices] = weights
+
+    norm = np.linalg.norm(vec)
+    if norm == 0:
+        norm = 1
+    vec /= norm
+
     return vec.reshape([1, -1])
 
 
@@ -69,7 +84,8 @@ def articles():
 
     articles.db = dict()
     for article in _articles:
-        weighted_text = ' '.join([article['title']] * 10 + [article['body']])
+        # weighted_text = ' '.join([article['title']]  * 10 + [article['body']])
+        weighted_text = article['title']
         bow = bag_of_words(weighted_text)
         articles.db[str(article['id'])] = {
             'title': article['title'],
