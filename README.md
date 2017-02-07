@@ -26,16 +26,16 @@ Those input files are no longer useful once the model is trained and the article
 
 ```bash
 $ python3 ssi.py sim 217699
-3.84685636729   : 打破疆界的物联网和 AR 技术，如何让「虚拟」更加「现实」？
-3.61724271244   : 专注操作系统技术，中科创达发布 TurboX「智能大脑」平台
-3.59738345349   : 对于 PC、触屏手机之后计算平台的人机交互，Google 是怎么看的？
-3.46270459857   : 微软、Google、IBM重金布局，量子计算与我们十年后的世界
-3.43106296409   : 吴恩达：百度新开放的语音技术有潜力彻底改变人机交互
-3.42430097898   : 当别人还在用人工智能构建未来，搜狗已经将 AI 融入了现在
-3.40786358509   : 总融资过亿美元，他想让你过钢铁侠般的智控生活
-3.40710506251   : 璇玑：智能投顾的非典型演化
-3.38436826075   : 高德开放平台推出 LBS 游戏行业解决方案 提供专业地图平台能力支持
-3.3501803571    : Google Daydream 在中国的第一次演讲，都说了啥？
+2.13198899294   : 打破疆界的物联网和 AR 技术，如何让「虚拟」更加「现实」？
+1.15135923978   : ThoughtWorks 发布新一期技术雷达，强调增强现实（AR）
+0.847500265669  : 京东发起 VR/AR 产业推进联盟，更强调 AR 布局
+0.825280328229  : 阿里巴巴 1500 万美元投资的 Infinity AR，可能成为 AR 设备普及的关键因素
+0.761123266508  : 2017，虚拟越来越现实
+0.621158115784  : 从巴黎车展的 VR/AR 元素说开去
+0.570553338498  : Focalmax 发布 Scati ONE VR/AR一体机
+0.533311997558  : 易瞳科技召开「VR/AR照进现实」行业应用研讨会
+0.434134904495  : 想去硅谷发展，创业公司该如何选择加速器？
+0.400667196302  : 在被阿里和京东称霸的「白条生意」里，这家创业公司如何拿到了 5 亿融资？
 ```
 
 In this example `217699` represents the querying article id. In my testing examples, it points to this this article: [打破疆界的物联网和 AR 技术，如何让「虚拟」更加「现实」？](http://www.geekpark.net/topics/217699).
@@ -44,16 +44,16 @@ In this example `217699` represents the querying article id. In my testing examp
 
 ```bash
 $ python3 ssi.py kw '京东'
-2.40102515298   : 京东全球智选助力美国融硅登陆中国
-2.13992414627   : 乐视控股联合兴业银行跨界合作 体育会员可享金融服务
-2.09966448199   : 京东、聚美、蘑菇街携手腾讯云，分享「双十一」电商风控安全心得
-2.01190108608   : 苹果回应自动关机：大家别急，我们正和问题用户联系|2016年11月17日极客早知道
-1.94554587584   : 蚂蚁金服与阿里云启动「蚂云计划」：服务全球 5 万家金融机构
-1.93188359361   : 企途时代·2016 企业服务创投峰会成功举办，IT 桔子发布企业服务创投白皮书
-1.92917382516   : YunOS 互联网汽车迎来 3 位「新成员」
-1.9018890173    : 支付宝要把十个海外机场变商场
-1.90078956102   : 京东接入今日头条，想让你在读文章时「不由自主」地一键下单
-1.89655877182   : 又下一城，途家宣布并购携程、去哪儿的公寓民宿业务
+1.50328955078   : 京东 CTO 张晨：京东要成为人工智能实践者和推动者
+1.37310452498   : 你在京东上每下一单，背后都有这些他们没告诉你的事
+1.03824354385   : 京东打造「语音购物」，「多快好省」的背后是怎样的技术变革？
+1.02038319821   : 京东全球智选助力美国融硅登陆中国
+0.878368431531  : 京东接入今日头条，想让你在读文章时「不由自主」地一键下单
+0.84315728172   : 京东智能云语音服务开放平台上线「唤醒」全新语音交互未来
+0.76815645032   : 为情怀充值，Nokia 6 京东预约超 15 万 | 极客早知道 2017 年 1 月 12 日
+0.759598675191  : 在被阿里和京东称霸的「白条生意」里，这家创业公司如何拿到了 5 亿融资？
+0.743158714877  : 京东、聚美、蘑菇街携手腾讯云，分享「双十一」电商风控安全心得
+0.719228294327  : 13 岁的京东和 13 岁的亚马逊
 ```
 
 In this example '京东' is the querying keyword. The keyword can be any sentence and will be segmentized using jieba.
@@ -69,12 +69,12 @@ In order to re-generate the model, or to reload the articles, remove the corresp
 
 ## techniques
 
+- *TF-IDF* is used to assign each word a weight representing their significances
 - *word2vec* is used to find word embedding (Mikolov et al., '13)
 - *Supervised Semantic Indexing*, or *SSI* is used to calculate document relevancy ranking (Bai et al, '09)
 
 ## license
 
 GPLv3
-
 
 
